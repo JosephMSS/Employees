@@ -2,7 +2,7 @@ exports.success=(req,res,message='',status=200)=>{
     res.status(status).send({
         error:false,
         status:status,
-        body:message
+        body:{message}
     })
 }
 exports.error=(req,res,message='Internal server error',status=500)=>{

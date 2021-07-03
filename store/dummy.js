@@ -1,22 +1,29 @@
 const { response } = require("express");
 
 let db = {
-  employee: [{ id: "1", name: "Joseph Morales", email: "joseph@joseph.com" }],
+  employee: [{ id: "1", name: "Joseph Morales", email: "joseph@joseph.com" },{ id: "2", name: "Yogurt", email: "yogurt@yogurt.com" }],
 };
 async function list(table) {
   return db[table] || [];
 }
-async function upsert(table, data) {
-    console.log('JMMS_data',data)
+async function insert(table, data) {
     if (!db[table]) {
       db[table]=[];
     }
     let response=await db[table].push(data)
-    console.log('JMMS_response',response)
     return response;
+}
+async function remove(table, id) {
+  const index = db[table].findIndex((item) => item.id === id);
+  if (index >= 0) {
+    db[table].splice(index, 1);
+    return true;
+  }
+   throw new Error('Usuario no encontrado')
 }
 module.exports = {
     list,
-    upsert
+    insert,
+    remove
 };
 
