@@ -2,8 +2,8 @@ const { response } = require("express");
 
 let db = {
   employee: [
-    { id: "1", name: "Joseph Morales", email: "joseph@joseph.com" },
-    { id: "2", name: "Yogurt", email: "yogurt@yogurt.com" },
+    { id: "1", name: "Marjorie Benavides", email: "Marjorie@Benavides.com" },
+    { id: "2", name: "Joseph Morales", email: "Joseph@Morales.com" },
   ],
 };
 async function list(table) {
