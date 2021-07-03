@@ -14,7 +14,7 @@ router.delete("/:id", removeEmployee);
 async function getEmployees(req, res) {
   try {
     let employees = await employeeController.getEmployees();
-    response.success(req, res, employees, "", 200);
+    response.success(req, res, employees, 200);
   } catch (error) {
     response.error(req, res);
   }
@@ -22,7 +22,7 @@ async function getEmployees(req, res) {
 async function insertEmployees(req, res) {
   try {
     let newEmployee = await employeeController.insertEmployees(req.body);
-    response.success(req, res, newEmployee, "", 201);
+    response.success(req, res, newEmployee, 201);
   } catch (error) {
     response.error(req, res, error.message);
   }
@@ -35,7 +35,7 @@ async function updateEmployees(req, res) {
     console.log('JMMS_id',id)
     let data={id,name,email}
     let newEmployee = await employeeController.updateEmployees(data);
-    response.success(req, res, newEmployee, "", 201);
+    response.success(req, res, newEmployee, 201);
   } catch (error) {
     response.error(req, res, error.message);
   }
