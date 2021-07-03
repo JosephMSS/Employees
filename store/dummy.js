@@ -23,10 +23,8 @@ async function update(table, data) {
   }
   const index = db[table].findIndex((item) => item.id === data.id);
   if (index >= 0) {
-    db[table] = data;
-    console.log("JMMS_typeof db[table]", typeof db[table]);
-    let arr = Array.from(db[table]);
-    let response = arr.find((item) => item.id === data.id);
+    db[table][index] = data;
+    let response = db[table][index];
     return response;
   }
   throw new Error("Usuario no encontrado");
