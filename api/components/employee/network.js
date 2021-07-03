@@ -24,17 +24,14 @@ async function insertEmployees(req, res) {
     let newEmployee = await employeeController.insertEmployees(req.body);
     response.success(req, res, newEmployee, 201);
   } catch (error) {
-    console.log('JMMS_error',error)
     response.error(req, res, error);
   }
 }
 async function updateEmployees(req, res) {
   try {
-    console.log('JMMS_req.body',req.body)
-    let { name, email }=req.body
-    let { id }=req.params
-    console.log('JMMS_id',id)
-    let data={id,name,email}
+    let { name, email } = req.body;
+    let { id } = req.params;
+    let data = { id, name, email };
     let newEmployee = await employeeController.updateEmployees(data);
     response.success(req, res, newEmployee, 201);
   } catch (error) {

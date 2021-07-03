@@ -15,20 +15,47 @@ module.exports = class EmployeeController {
         reject("Datos no validos!");
         return false;
       }
-      let id = nanoid();
-      let data = { id, name, email };
-      let employees = await this.store.insert(TABLE, data);
-      resolve(employees);
+      try {
+          
+          let id = nanoid();
+          let data = { id, name, email };
+          let employees = await this.store.insert(TABLE, data);
+          resolve(employees);
+      } catch (error) {
+          reject(error)
+          return false
+      }
     });
   }
   async updateEmployees({ id, name, email }) {
-    let data = { id, name, email };
-    console.log("JMMS_data", data);
-    let employees = await this.store.update(TABLE, data);
-    return employees;
+    return new Promise(async (resolve, reject) => {
+      if (!id || !name || !email) {
+        reject("Datos no validos!");
+        return false;
+      }
+      try {
+        let data = { id, name, email };
+        let employees = await this.store.update(TABLE, data);
+        resolve(employees);
+      } catch (error) {
+        reject(error);
+        return false;
+      }
+    });
   }
   async removeEmployee({ id }) {
-    let employees = await this.store.remove(TABLE, id);
-    return employees;
+    return new Promise(async (resolve, reject) => {
+      if (!id) {
+        reject("Datos no validos!");
+        return false;
+      }
+      try {
+        let employees = await this.store.remove(TABLE, id);
+        resolve(employees);
+      } catch (error) {
+        reject(error);
+        return false;
+      }
+    });
   }
 };
