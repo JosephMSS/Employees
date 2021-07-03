@@ -1,4 +1,6 @@
 const TABLE = "employee";
+const { nanoid } = require("nanoid");
+
 module.exports = class EmployeeController {
   constructor(store) {
     this.store = store;
@@ -7,14 +9,21 @@ module.exports = class EmployeeController {
     let employees = await this.store.list(TABLE);
     return employees;
   }
-  async insertEmployees({ id, name, email }) {
-    let data = { id, name, email };
-    let employees = await this.store.insert(TABLE, data);
-    return employees;
+  async insertEmployees({ name, email }) {
+    return new Promise(async (resolve, reject) => {
+      if (!name || !email) {
+        reject("Datos no validos!");
+        return false;
+      }
+      let id = nanoid();
+      let data = { id, name, email };
+      let employees = await this.store.insert(TABLE, data);
+      resolve(employees);
+    });
   }
   async updateEmployees({ id, name, email }) {
     let data = { id, name, email };
-    console.log('JMMS_data',data)
+    console.log("JMMS_data", data);
     let employees = await this.store.update(TABLE, data);
     return employees;
   }
